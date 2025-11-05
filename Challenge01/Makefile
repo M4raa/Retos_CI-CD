@@ -1,16 +1,23 @@
-CC=gcc
-CFLAGS=-Wall -Wextra -Werror
-TARGET=starter
-TEST_TARGET=test_challenge01
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -mconsole
 
-all: $(TARGET)
+# Archivos fuente principales
+SRC = starter.c
 
-$(TARGET): starter.c
-	$(CC) $(CFLAGS) -o $(TARGET) starter.c
+# Archivos de test
+TEST = test_challenge01.c
 
-test: starter.c test_challenge01.c
-	$(CC) $(CFLAGS) -o $(TEST_TARGET) starter.c test_challenge01.c
-	./$(TEST_TARGET)
+# Nombre del ejecutable
+TARGET = challenge01
 
+# Regla principal (compila el programa junto con los tests)
+all:
+	$(CC) $(CFLAGS) $(SRC) $(TEST) -o $(TARGET).exe
+
+# Ejecutar los tests
+test: all
+	$(TARGET).exe
+
+# Limpiar el ejecutable
 clean:
-	rm -f $(TARGET) $(TEST_TARGET)
+	del $(TARGET).exe
