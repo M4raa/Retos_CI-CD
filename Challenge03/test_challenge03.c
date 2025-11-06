@@ -1,50 +1,49 @@
 #include <stdio.h>
 #include <assert.h>
 
-// Funcion de suma de dos parametros
-int suma(int a, int b);
+size_t mi_strlen(const char *s);
 
-// Funcion de resta de dos parametros
-int resta(int a, int b);
+int mi_strcmp(const char *s1, const char *s2);
 
-// Funcion de suma de dos parametros
-int multiplicacion(int a, int b);
-
-// Funcion de suma de dos parametros
-int division(int a, int b);
+char *mi_strcpy(char *dest, const char *src);
 
 int main() {
-    // Suma de dos positivos
-    assert(suma(5, 7) == 12);
-    // Suma de un negativo y un positivo
-    assert(suma(-3, 3) == 0);
-    // Suma de dos negativos
-    assert(suma(-5, -7) == -12);
 
-    // Resta de dos positivos
-    assert(resta(5, 7) == -2);
-    // Resta de un negativo y un positivo
-    assert(resta(-3, 3) == -6);
-    // Resta de dos negativos
-    assert(resta(-5, -7) == 2);
+    //LONGITUD
+    //Normal
+    assert(mi_strlen("hola") == 4);
+    //Cadena vacía
+    assert(mi_strlen("") == 0);
 
-    // Multiplicacion de dos positivos
-    assert(multiplicacion(5, 7) == 35);
-    // Multiplicacion de un negativo y un positivo
-    assert(multiplicacion(-3, 3) == -9);
-    // Multiplicacion de dos negativos
-    assert(multiplicacion(-5, -7) == 35);
+    //COMPARAR
+    //Destino vacío
+    assert(mi_strcmp("","hola") != 0);
+    //Cadenas vacías
+    assert(mi_strcmp("","") == 0);
+    //Origen vacío
+    assert(mi_strcmp("hola","") != 0);
+    //Cadenas iguales
+    assert(mi_strcmp("hola","hola") == 0);
 
+    //COPIAR
+    char buffer1[20];
+    char buffer2[5] = "AAAA";
+    //Destino vacío
+    assert(mi_strcpy(buffer1, "hola") == buffer1);
+    assert(mi_strcmp(buffer1, "hola") == 0);
+    //Cadenas vacías
+    assert(mi_strcpy(buffer1, "") == buffer1);
+    assert(mi_strcmp(buffer1, "") == 0);
+    //Origen vacío
+    assert(mi_strcpy(buffer2, "") == buffer2);
+    assert(mi_strcmp(buffer2, "") == 0);
+    //Cadenas iguales
+    assert(mi_strcpy(buffer1, "test") == buffer1);
+    assert(mi_strcmp(buffer1, "test") == 0);
+    //Sobreescritura
+    assert(mi_strcpy(buffer2, "pepe") == buffer2);
+    assert(mi_strcmp(buffer2, "pepe") == 0);
 
-    // Division de dos positivos
-    assert(division(25, 5) == 5);
-    // Division de un negativo y un positivo
-    assert(division(-9, 3) == -3);
-    // Division de dos negativos
-    assert(division(-25, -5) == 5);
-    // Division por cero
-    assert(division(5, 0) == 0);
-
-    printf("Funciones definidas exitosamente.\n");
+    printf("Test correcto. \n");
     return 0;
 }
